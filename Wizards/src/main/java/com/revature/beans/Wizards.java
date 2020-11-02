@@ -2,6 +2,10 @@ package com.revature.beans;
 
 import java.io.Serializable;
 
+import com.revature.util.Coven;
+import com.revature.util.File;
+import com.revature.util.Log;
+
 public class Wizards implements Serializable {
 	
 	/**
@@ -45,6 +49,9 @@ public class Wizards implements Serializable {
 		this.wizardClass = wizardClass;
 		this.powerLevel = powerLevel;
 		this.beard = beard;
+		Coven.wizardCoven.add(this);
+		File.storeWizards(Coven.wizardCoven);
+		Log.Logging("info", "A new wizard " + this.getName() +  ", has been forged from the ether!");
 	}
 	
 	public Wizards() {
