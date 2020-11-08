@@ -1,6 +1,9 @@
 package com.revature.beans;
 
-public class PendingAccts {
+import com.revature.data.PendingRecords;
+import com.revature.util.Log;
+
+public class PendingAccts implements Comparable<PendingAccts>{
 	
 	private Integer acctNum;
 	private double balance;
@@ -22,6 +25,10 @@ public class PendingAccts {
 		super();
 		this.acctNum = acctNum;
 		this.balance = balance;
+		
+		PendingRecords.pendingRecs.add(this);
+		Log.logging("info", "Your account has been added to our pending account queue.");
+		
 	}
 	
 	public PendingAccts() {
@@ -32,6 +39,11 @@ public class PendingAccts {
 	@Override
 	public String toString() {
 		return "PendingAccts [acctNum=" + acctNum + ", balance=" + balance + "]";
+	}
+	@Override
+	public int compareTo(PendingAccts arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

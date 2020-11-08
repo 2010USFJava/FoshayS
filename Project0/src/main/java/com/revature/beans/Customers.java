@@ -1,5 +1,8 @@
 package com.revature.beans;
 
+import com.revature.data.CustRecords;
+import com.revature.util.Log;
+
 public class Customers {
 	
 	private String custName;
@@ -7,7 +10,9 @@ public class Customers {
 	private String custNumber;
 	private String custUserName;
 	private String custPassword;
+	private Boolean jointAcct;
 	private Integer acctNum;
+	private Boolean acctApproval;
 	
 	public String getCustName() {
 		return custName;
@@ -39,35 +44,53 @@ public class Customers {
 	public void setCustPassword(String custPassword) {
 		this.custPassword = custPassword;
 	}
+	public Boolean getJointAcct() {
+		return jointAcct;
+	}
+	public void setJointAcct(Boolean jointAcct) {
+		this.jointAcct = jointAcct;
+	}
 	public Integer getAcctNum() {
 		return acctNum;
 	}
 	public void setAcctNum(Integer acctNum) {
 		this.acctNum = acctNum;
 	}
-	
+	public Boolean getAcctApproval() {
+		return acctApproval;
+	}
+	public void setAcctApproval(Boolean acctApproval) {
+		this.acctApproval = acctApproval;
+	}
 	
 	public Customers(String custName, String custAddress, String custNumber, String custUserName, String custPassword,
-			Integer acctNum) {
+			Boolean jointAcct, Integer acctNum, Boolean acctApproval) {
 		super();
 		this.custName = custName;
 		this.custAddress = custAddress;
 		this.custNumber = custNumber;
 		this.custUserName = custUserName;
 		this.custPassword = custPassword;
+		this.jointAcct = jointAcct;
 		this.acctNum = acctNum;
+		this.acctApproval = acctApproval;
+		CustRecords.custSet.add(this);
+		//write to file
+		Log.logging("info", this.getCustName() +  " has been added to our system.");
 	}
 	
 	public Customers() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Override
 	public String toString() {
 		return "Customers [custName=" + custName + ", custAddress=" + custAddress + ", custNumber=" + custNumber
-				+ ", custUserName=" + custUserName + ", custPassword=" + custPassword + ", acctNum=" + acctNum + "]";
+				+ ", custUserName=" + custUserName + ", custPassword=" + custPassword + ", jointAcct=" + jointAcct
+				+ ", acctNum=" + acctNum + ", acctApproval=" + acctApproval + "]";
 	}
 	
-
+	
 
 }
