@@ -110,6 +110,12 @@ public class CustMenu {
 		System.out.println("Please have a great day, you will now be redirected to the main menu.");
 		System.out.println(CustRecords.custSet.toString());
 		System.out.println(PendingRecords.pendingRecs.toString());
+		System.out.println("Enter Acct Number");
+		Integer j = 22329;
+		System.out.println(j);
+		System.out.println("Testing file reading");
+		Customers x = CustRecords.selectCustomer(j);
+		System.out.println(x.getCustName());
 		
 	}
 }

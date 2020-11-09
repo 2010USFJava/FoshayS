@@ -1,9 +1,17 @@
 package com.revature.beans;
 
+import java.io.Serializable;
+
 import com.revature.data.CustRecords;
+import com.revature.util.File;
 import com.revature.util.Log;
 
-public class Customers {
+public class Customers implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5837854056587661038L;
 	
 	private String custName;
 	private String custAddress;
@@ -75,7 +83,7 @@ public class Customers {
 		this.acctNum = acctNum;
 		this.acctApproval = acctApproval;
 		CustRecords.custSet.add(this);
-		//write to file
+		File.writeCust(CustRecords.custSet);
 		Log.logging("info", this.getCustName() +  " has been added to our system.");
 	}
 	

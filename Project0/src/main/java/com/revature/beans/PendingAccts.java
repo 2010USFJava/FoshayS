@@ -1,9 +1,17 @@
 package com.revature.beans;
 
+import java.io.Serializable;
+
 import com.revature.data.PendingRecords;
+import com.revature.util.File;
 import com.revature.util.Log;
 
-public class PendingAccts implements Comparable<PendingAccts>{
+public class PendingAccts implements Comparable<PendingAccts>, Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7436432886666999142L;
 	
 	private Integer acctNum;
 	private double balance;
@@ -25,15 +33,15 @@ public class PendingAccts implements Comparable<PendingAccts>{
 		super();
 		this.acctNum = acctNum;
 		this.balance = balance;
-		
 		PendingRecords.pendingRecs.add(this);
+		File.writePending(PendingRecords.pendingRecs);
 		Log.logging("info", "Your account has been added to our pending account queue.");
 		
 	}
 	
 	public PendingAccts() {
 		super();
-		// TODO Auto-generated constructor stub
+		File.writePending(PendingRecords.pendingRecs);
 	}
 	
 	@Override

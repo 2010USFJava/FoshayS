@@ -1,7 +1,14 @@
 package com.revature.beans;
 
-public class Admins {
+import java.io.Serializable;
 
+public class Admins implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4667721750908666358L;
+	
 	private String userName;
 	private String password;
 	

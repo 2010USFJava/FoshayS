@@ -1,6 +1,17 @@
 package com.revature.beans;
 
-public class Accounts {
+import java.io.Serializable;
+
+import com.revature.data.AcctRecords;
+import com.revature.util.File;
+import com.revature.util.Log;
+
+public class Accounts implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3346028631221150720L;
 	
 	private Integer acctNum;
 	private double balance;
@@ -22,6 +33,9 @@ public class Accounts {
 		super();
 		this.acctNum = acctNum;
 		this.balance = balance;
+		AcctRecords.acctMap.put(this.acctNum, this);
+		File.writeAcct(AcctRecords.acctMap);
+		Log.logging("info", this.getAcctNum() + " has been approved.");
 	}
 	
 	public Accounts() {

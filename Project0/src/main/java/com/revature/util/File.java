@@ -25,7 +25,7 @@ public class File {
 	public static final String empFile = "employees.txt";
 	public static final String adminFile = "admins.txt";
 	public static final String acctFile = "accounts.txt";
-	public static final String rejectFile = "rejectedaccts.txt";
+	public static final String pendingFile = "pendingaccts.txt";
 	
 	//Write&Read Customers Information
 	
@@ -161,9 +161,9 @@ public class File {
 	
 	//Write&Read Rejected Accounts from Pending Accounts
 	
-	public static void writeReject(PriorityQueue<PendingAccts> pendingRecs) {
+	public static void writePending(PriorityQueue<PendingAccts> pendingRecs) {
 		try {
-			ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(rejectFile));
+			ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(pendingFile, true));
 			objOut.writeObject(pendingRecs);
 			objOut.close();
 		} catch (FileNotFoundException e) {
@@ -176,9 +176,9 @@ public class File {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void readReject() {
+	public static void readPending() {
 		try {
-			ObjectInputStream objIn = new ObjectInputStream(new FileInputStream(rejectFile));
+			ObjectInputStream objIn = new ObjectInputStream(new FileInputStream(pendingFile));
 			PendingRecords.pendingRecs = (PriorityQueue<PendingAccts>)objIn.readObject();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

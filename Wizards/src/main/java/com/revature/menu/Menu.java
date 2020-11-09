@@ -1,4 +1,4 @@
-package com.revature.menu;
+	package com.revature.menu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
