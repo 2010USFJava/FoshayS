@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.revature.beans.Accounts;
 import com.revature.beans.Customers;
 import com.revature.data.AcctRecords;
+import com.revature.exceptions.NegNumException;
 import com.revature.menu.CustMenu;
 import com.revature.util.Log;
 
@@ -44,7 +45,7 @@ public class Transactions {
 		}
 	}
 	
-	public static void withdraw(Integer num) {
+	public static void withdraw(Integer num) throws NegNumException{
 		acct = AcctRecords.acctMap.get(num);
 		double balance = acct.getBalance();
 		acct.setBalance(balance - money);
@@ -53,7 +54,7 @@ public class Transactions {
 		
 	}
 	
-	public static void deposit(Integer num) {
+	public static void deposit(Integer num) throws NegNumException{
 		acct = AcctRecords.acctMap.get(num);
 		double balance = acct.getBalance();
 		acct.setBalance(balance + money);
@@ -63,7 +64,13 @@ public class Transactions {
 	
 	public static void depositBlurb(Integer num, int count) {
 		System.out.println("How much would you like to deposit?");
-		money = Double.parseDouble(sc.nextLine());
+		try {
+			money = Double.parseDouble(sc.nextLine());
+		}
+		catch (NegNumException e){
+			e.printStackTrace();
+		}
+		
 		deposit(num);
 		transactions(cust, counter);
 	}
@@ -72,6 +79,7 @@ public class Transactions {
 		System.out.println("How much would you like to withdraw?");
 		money = Double.parseDouble(sc.nextLine());
 		withdraw(num);
+		
 		transactions(cust, counter);
 	}
 	
