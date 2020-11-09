@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.revature.beans.Accounts;
 import com.revature.beans.Customers;
 import com.revature.beans.PendingAccts;
+import com.revature.data.AcctRecords;
 import com.revature.data.CustRecords;
 import com.revature.data.PendingRecords;
 import com.revature.menu.MainMenu;
@@ -12,6 +13,7 @@ import com.revature.util.Log;
 
 public class AcctInfo {
 	
+	static Integer acctNum = null;
 	static Scanner sc = new Scanner(System.in);
 	
 	public static void accountInfo() {
@@ -23,7 +25,11 @@ public class AcctInfo {
 		String acctOpt = sc.nextLine();
 		switch(acctOpt.toLowerCase()) {
 		case "a":
-			viewAccts();
+			System.out.println("Please enter the number of the account you would like to see?");
+			acctNum = Integer.parseInt(sc.nextLine());
+			System.out.println(acctNum);
+			viewAccts(acctNum);
+			accountInfo();
 			break;
 		case "p":
 			pendingAccts();
@@ -39,13 +45,15 @@ public class AcctInfo {
 		}
 	}
 	
-	public static void viewAccts() {
-		
+	public static void viewAccts(Integer num) {
+		Customers x = CustRecords.selectCustomer(num);
+		Accounts y = AcctRecords.acctMap.get(num);
+		System.out.println(x);
+		System.out.println(y);
 	}
 	
 	public static void pendingAccts() {
 		PendingAccts x = PendingRecords.pendingRecs.peek();
-		Integer acctNum = null;
 		double balance = 0;
 		Customers cust = null;
 		

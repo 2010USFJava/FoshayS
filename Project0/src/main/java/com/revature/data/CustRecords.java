@@ -19,4 +19,12 @@ public class CustRecords {
 		return null;
 	}
 	
+	public static Customers loginCustomer(String userName) {
+		Iterator<Customers> log = custSet.iterator();
+		for(Customers log1: custSet)
+			return log1;
+		System.out.println("Invalid username");
+		return null;
+	}
+	
 }

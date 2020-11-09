@@ -7,6 +7,7 @@ import com.revature.beans.Customers;
 import com.revature.beans.PendingAccts;
 import com.revature.data.CustRecords;
 import com.revature.data.PendingRecords;
+import com.revature.service.AcctInfo;
 import com.revature.util.Log;
 
 public class CustMenu {
@@ -16,6 +17,7 @@ public class CustMenu {
 	public static Integer acctNum;
 	public static String custUserName;
 	public static String custPassword;
+	public static Customers x = null;
 	
 	static Scanner sc = new Scanner(System.in);
 	
@@ -53,6 +55,7 @@ public class CustMenu {
     }
 	
 	public static void customerMenu() {
+		
 		System.out.println("Do you need to Login or Register as a New Customer?");
 		System.out.println("\t[L]ogin");
 		System.out.println("\t[R]egister");
@@ -72,12 +75,51 @@ public class CustMenu {
 		}
 	}
 	
+	public static void custAccount() {
+		System.out.println("You are now logged into your account.");
+		System.out.println("\t[V]iew account details");
+		System.out.println("\t[M]ake a transaction");
+		System.out.println("\t[E]xit Account");
+		String userOpt = sc.nextLine();
+		switch(userOpt.toLowerCase()) {
+		case "v":
+			AcctInfo.viewAccts(x.getAcctNum());
+			break;
+		case "m":
+			//transaction();
+			break;
+		case "e":
+			MainMenu.startMenu();
+			break;
+		default:
+			System.out.println("Invalid Input. Please try again.");
+			custAccount();
+			break;
+			
+		}
+	}
+	
 	public static void customerLogin() {
+		String passTemp = null;
 		System.out.println("Enter Username:");
-		String userName = sc.nextLine();
-		
-		System.out.println("Enter Password");
-		String userPass = sc.nextLine();
+		custUserName = sc.nextLine();
+		x = CustRecords.loginCustomer(custUserName);
+		if(x == null) {
+			System.out.println("Invalid UserName. Please try again.");
+			customerLogin();
+		}
+		else {
+			System.out.println("Enter Password:");
+			passTemp = x.getCustPassword();
+		}
+		String passLogin = sc.nextLine();
+		if(passTemp == passLogin) {
+			custAccount();
+		}
+		else {
+			System.out.println("Invalid Password. Please try again.");
+			customerLogin();
+		}
 	}
 	
 	public static void customerReg() {
@@ -110,12 +152,6 @@ public class CustMenu {
 		System.out.println("Please have a great day, you will now be redirected to the main menu.");
 		System.out.println(CustRecords.custSet.toString());
 		System.out.println(PendingRecords.pendingRecs.toString());
-		System.out.println("Enter Acct Number");
-		Integer j = 22329;
-		System.out.println(j);
-		System.out.println("Testing file reading");
-		Customers x = CustRecords.selectCustomer(j);
-		System.out.println(x.getCustName());
 		
 	}
 }
