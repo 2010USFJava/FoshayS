@@ -20,10 +20,10 @@ public class MainMenu {
 			CustMenu.customerMenu();
 			break;
 		case "e":
-			EmpMenu.empLogin();
+			EmpMenu.empMenu();
 			break;
 		case "a":
-			AdminMenu.adminLogin();
+			AdminMenu.startAdmin();
 			break;
 		case "l":
 			System.out.println("Thank you for banking with Java Bank. Please come back soon.");

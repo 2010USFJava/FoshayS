@@ -44,22 +44,24 @@ public class EmpMenu {
 		
 		Employees x = new Employees(empUserName, empPassword, empName);
 		Log.logging("info", "Employee " + x.getEmpName() + " has been created");
+		empMenu();
 	}
 	
 	public static void empLogin() {
 		String loginTemp = null;
 		System.out.println("Enter Employee UserName to Login");
 		String empLogin = sc.nextLine();
+		loginTemp = EmpRecords.empMap.get(empLogin);
+		System.out.println(loginTemp);
 		if(EmpRecords.empMap.containsKey(empLogin)) {
 			System.out.println("Enter Employee Password to Login");
-			loginTemp = EmpRecords.empMap.get(empLogin);
 		}
 		else {
 			System.out.println("That UserName does not exist. Please try again.");
 			empLogin();
 		}
 		String passLogin = sc.nextLine();
-		if(loginTemp == passLogin) {
+		if(loginTemp.equals(passLogin)) {
 			System.out.println("You are now logged in to the Employee Portal");
 			AcctInfo.accountInfo(counter);
 		}

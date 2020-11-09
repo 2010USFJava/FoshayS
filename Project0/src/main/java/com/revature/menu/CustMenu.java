@@ -87,7 +87,7 @@ public class CustMenu {
 		String userOpt = sc.nextLine();
 		switch(userOpt.toLowerCase()) {
 		case "v":
-			AcctInfo.viewAccts(x.getAcctNum());
+			AcctInfo.viewAccts(x.getAcctNum(), counter);
 			break;
 		case "m":
 			Transactions.transactions(x, 0);
@@ -113,16 +113,15 @@ public class CustMenu {
 		System.out.println("Enter Username:");
 		custUserName = sc.nextLine();
 		x = CustRecords.loginCustomer(custUserName);
+		passTemp = x.getCustPassword();
 		if(x == null) {
 			System.out.println("Invalid UserName. Please try again.");
 			customerLogin();
 		}
-		else {
-			System.out.println("Enter Password:");
-			passTemp = x.getCustPassword();
-		}
+		System.out.println("Enter Password:");
 		String passLogin = sc.nextLine();
-		if(passTemp == passLogin) {
+		
+		if(passTemp.equals(passLogin)) {
 			custAccount(x, 0);
 		}
 		else {
@@ -161,6 +160,6 @@ public class CustMenu {
 		System.out.println("Please have a great day, you will now be redirected to the main menu.");
 		System.out.println(CustRecords.custSet.toString());
 		System.out.println(PendingRecords.pendingRecs.toString());
-		
+		MainMenu.startMenu();
 	}
 }

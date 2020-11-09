@@ -9,6 +9,7 @@ import com.revature.data.AcctRecords;
 import com.revature.data.CustRecords;
 import com.revature.data.PendingRecords;
 import com.revature.menu.AdminMenu;
+import com.revature.menu.CustMenu;
 import com.revature.menu.MainMenu;
 import com.revature.util.Log;
 
@@ -31,8 +32,12 @@ public class AcctInfo {
 		case "a":
 			System.out.println("Please enter the number of the account you would like to see?");
 			acctNum = Integer.parseInt(sc.nextLine());
-			System.out.println(acctNum);
-			viewAccts(acctNum);
+			if(CustRecords.selectCustomer(acctNum) != null) {
+				viewAccts(acctNum, counter);
+			}
+			else {
+				System.out.println("Account doesn't exist.");
+			}
 			accountInfo(counter);
 			break;
 		case "p":
@@ -54,11 +59,17 @@ public class AcctInfo {
 		}
 	}
 	
-	public static void viewAccts(Integer num) {
+	public static void viewAccts(Integer num, int count) {
 		Customers x = CustRecords.selectCustomer(num);
 		Accounts y = AcctRecords.acctMap.get(num);
 		System.out.println(x);
 		System.out.println(y);
+		if(counter == 0) {
+			CustMenu.custAccount(x, counter);
+		}
+		else {
+			AdminMenu.adminMenu(x);
+		}
 	}
 	
 	public static void pendingAccts() {

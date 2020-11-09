@@ -44,18 +44,18 @@ public class AdminMenu {
 	
 	public static void adminLogin() {
 		String loginTemp = null;
-		System.out.println("Enter Employee UserName to Login");
+		System.out.println("Enter Admin UserName to Login");
 		String adminLog = sc.nextLine();
+		loginTemp = AdminRecords.adminMap.get(adminLog);
 		if(AdminRecords.adminMap.containsKey(adminLog)) {
-			System.out.println("Enter Employee Password to Login");
-			loginTemp = AdminRecords.adminMap.get(adminLog);
+			System.out.println("Enter Admin Password to Login");
 		}
 		else {
 			System.out.println("That UserName does not exist. Please try again.");
 			adminLogin();
 		}
 		String passLogin = sc.nextLine();
-		if(loginTemp == passLogin) {
+		if(loginTemp.equals(passLogin)) {
 			System.out.println("You are now logged in to the Administrator Portal");
 			adminMenu(x);
 		}
@@ -75,6 +75,7 @@ public class AdminMenu {
 		
 		Admins x = new Admins(adminUserName, adminPassword);
 		Log.logging("info", "Admin " + x.getUserName() + " has been created");
+		startAdmin();
 	}
 	
 	public static void cancel() {
