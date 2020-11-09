@@ -23,7 +23,7 @@ public class MainMenu {
 			EmpMenu.empLogin();
 			break;
 		case "a":
-			//AdminMenu.adminLogin();
+			AdminMenu.adminLogin();
 			break;
 		case "l":
 			System.out.println("Thank you for banking with Java Bank. Please come back soon.");

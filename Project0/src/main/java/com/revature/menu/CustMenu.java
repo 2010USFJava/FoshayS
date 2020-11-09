@@ -8,6 +8,7 @@ import com.revature.beans.PendingAccts;
 import com.revature.data.CustRecords;
 import com.revature.data.PendingRecords;
 import com.revature.service.AcctInfo;
+import com.revature.service.Transactions;
 import com.revature.util.Log;
 
 public class CustMenu {
@@ -18,6 +19,7 @@ public class CustMenu {
 	public static String custUserName;
 	public static String custPassword;
 	public static Customers x = null;
+	public static int counter = 0;
 	
 	static Scanner sc = new Scanner(System.in);
 	
@@ -75,8 +77,10 @@ public class CustMenu {
 		}
 	}
 	
-	public static void custAccount() {
-		System.out.println("You are now logged into your account.");
+	public static void custAccount(Customers y, int count) {
+		x = y;
+		counter = count;
+		System.out.println("You are now logged into " + x.getAcctNum());
 		System.out.println("\t[V]iew account details");
 		System.out.println("\t[M]ake a transaction");
 		System.out.println("\t[E]xit Account");
@@ -86,14 +90,19 @@ public class CustMenu {
 			AcctInfo.viewAccts(x.getAcctNum());
 			break;
 		case "m":
-			//transaction();
+			Transactions.transactions(x, 0);
 			break;
 		case "e":
-			MainMenu.startMenu();
+			if(counter == 0) {
+				MainMenu.startMenu();
+			}
+			else {
+				AdminMenu.adminMenu(x);
+			}
 			break;
 		default:
 			System.out.println("Invalid Input. Please try again.");
-			custAccount();
+			custAccount(x, counter);
 			break;
 			
 		}
@@ -114,7 +123,7 @@ public class CustMenu {
 		}
 		String passLogin = sc.nextLine();
 		if(passTemp == passLogin) {
-			custAccount();
+			custAccount(x, 0);
 		}
 		else {
 			System.out.println("Invalid Password. Please try again.");

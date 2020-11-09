@@ -8,6 +8,7 @@ import com.revature.beans.PendingAccts;
 import com.revature.data.AcctRecords;
 import com.revature.data.CustRecords;
 import com.revature.data.PendingRecords;
+import com.revature.menu.AdminMenu;
 import com.revature.menu.MainMenu;
 import com.revature.util.Log;
 
@@ -15,8 +16,11 @@ public class AcctInfo {
 	
 	static Integer acctNum = null;
 	static Scanner sc = new Scanner(System.in);
+	static int counter = 0;
+	public static Customers x = null;
 	
-	public static void accountInfo() {
+	public static void accountInfo(int count) {
+		counter = count;
 		System.out.println("Which would you like to see?");
 		System.out.println("\t[A]ctive Accounts");
 		System.out.println("\t[P]ending Accounts");
@@ -29,18 +33,23 @@ public class AcctInfo {
 			acctNum = Integer.parseInt(sc.nextLine());
 			System.out.println(acctNum);
 			viewAccts(acctNum);
-			accountInfo();
+			accountInfo(counter);
 			break;
 		case "p":
 			pendingAccts();
 			break;
 		case "e":
 			System.out.println("You are leaving accounts.");
-			MainMenu.startMenu();
+			if(count != 0) {
+				AdminMenu.adminMenu(x);
+			}
+			else {
+				MainMenu.startMenu();
+			}
 			break;
 		default:
 			System.out.println("Invalid Input. Please try again.");
-			accountInfo();
+			accountInfo(counter);
 			break;
 		}
 	}
@@ -66,7 +75,7 @@ public class AcctInfo {
 		}
 		else {
 			System.out.println("There are no pending accounts at this time.");
-			accountInfo();
+			accountInfo(counter);
 		}
 		System.out.println("\t[A]pprove");
 		System.out.println("\t[D]eny");
@@ -78,14 +87,14 @@ public class AcctInfo {
 			Log.logging("info", acctNum + " has been approved.");
 			PendingRecords.pendingRecs.remove();
 			new PendingAccts();
-			accountInfo();
+			accountInfo(counter);
 			break;
 		case "d":
 			cust.setAcctApproval(false);
 			Log.logging("info", acctNum + " has been denied.");
 			PendingRecords.pendingRecs.remove();
 			new PendingAccts();
-			accountInfo();
+			accountInfo(counter);
 			break;
 		default:
 			System.out.println("Invalid input. Please try again.");

@@ -2,6 +2,10 @@ package com.revature.beans;
 
 import java.io.Serializable;
 
+import com.revature.data.AdminRecords;
+import com.revature.util.File;
+import com.revature.util.Log;
+
 public class Admins implements Serializable{
 
 	/**
@@ -29,6 +33,9 @@ public class Admins implements Serializable{
 		super();
 		this.userName = userName;
 		this.password = password;
+		AdminRecords.adminMap.put(this.userName, this.password);
+		File.writeAdmin(AdminRecords.adminMap);
+		Log.logging("info", this.getUserName() + " has been added to the Admin register.");
 	}
 	
 	public Admins() {

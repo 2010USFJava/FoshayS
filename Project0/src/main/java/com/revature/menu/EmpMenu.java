@@ -10,6 +10,7 @@ import com.revature.util.Log;
 public class EmpMenu {
 	
 	static Scanner sc = new Scanner(System.in);
+	public static int counter = 0;
 
 	public static void empMenu() {
 		System.out.println("Do you need to Login or Register as a New Employee?");
@@ -60,7 +61,7 @@ public class EmpMenu {
 		String passLogin = sc.nextLine();
 		if(loginTemp == passLogin) {
 			System.out.println("You are now logged in to the Employee Portal");
-			AcctInfo.accountInfo();
+			AcctInfo.accountInfo(counter);
 		}
 		else {
 			System.out.println("Password is incorrect. Please try logging in again.");

@@ -25,52 +25,71 @@ public class Customers implements Serializable{
 	public String getCustName() {
 		return custName;
 	}
+
 	public void setCustName(String custName) {
 		this.custName = custName;
 	}
+
 	public String getCustAddress() {
 		return custAddress;
 	}
+
 	public void setCustAddress(String custAddress) {
 		this.custAddress = custAddress;
 	}
+
 	public String getCustNumber() {
 		return custNumber;
 	}
+
 	public void setCustNumber(String custNumber) {
 		this.custNumber = custNumber;
 	}
+
 	public String getCustUserName() {
 		return custUserName;
 	}
+
 	public void setCustUserName(String custUserName) {
 		this.custUserName = custUserName;
 	}
+
 	public String getCustPassword() {
 		return custPassword;
 	}
+
 	public void setCustPassword(String custPassword) {
 		this.custPassword = custPassword;
 	}
+
 	public Boolean getJointAcct() {
 		return jointAcct;
 	}
+
 	public void setJointAcct(Boolean jointAcct) {
 		this.jointAcct = jointAcct;
 	}
+
 	public Integer getAcctNum() {
 		return acctNum;
 	}
+
 	public void setAcctNum(Integer acctNum) {
 		this.acctNum = acctNum;
 	}
+
 	public Boolean getAcctApproval() {
 		return acctApproval;
 	}
+
 	public void setAcctApproval(Boolean acctApproval) {
 		this.acctApproval = acctApproval;
 	}
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public Customers(String custName, String custAddress, String custNumber, String custUserName, String custPassword,
 			Boolean jointAcct, Integer acctNum, Boolean acctApproval) {
 		super();
