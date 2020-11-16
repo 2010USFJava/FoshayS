@@ -16,10 +16,10 @@ public class Transactions {
 	static double money;
 	static Scanner sc = new Scanner(System.in);
 	static int counter = 0;
+	static Boolean i = null;
 	
 	public static void transactions(Customers x, int count) {
 		cust = x;
-		acctNum = x.getAcctNum();
 		counter = count;
 		System.out.println("What transaction would you like to make?");
 		System.out.println("\t[W]ithdrawal");
@@ -29,13 +29,33 @@ public class Transactions {
 		String choice = sc.nextLine();
 		switch(choice.toLowerCase()) {
 		case "w":
+			if(counter == 0) {
+			acctNum = x.getAcctNum();
 			withdrawBlurb(acctNum, counter);
+			}
+			else {
+			transferBlurb(acctNum, counter);
+			i = true;
+			}
 			break;
 		case "d":
+			if(counter == 0) {
+			acctNum = x.getAcctNum();
 			depositBlurb(acctNum, counter);
+			}
+			else {
+			transferBlurb(acctNum, counter);
+			i = false;
+			}
 			break;
 		case "t":
+			if(counter == 0) {
+			acctNum = x.getAcctNum();
 			transfer(acctNum, counter);
+			}
+			else {
+			transferBlurb(acctNum, counter);
+			}
 			break;
 		case "e":
 			CustMenu.custAccount(cust, counter);
@@ -45,7 +65,7 @@ public class Transactions {
 		}
 	}
 	
-	public static void withdraw(Integer num) throws NegNumException{
+	public static void withdraw(Integer num){
 		acct = AcctRecords.acctMap.get(num);
 		double balance = acct.getBalance();
 		acct.setBalance(balance - money);
@@ -54,7 +74,7 @@ public class Transactions {
 		
 	}
 	
-	public static void deposit(Integer num) throws NegNumException{
+	public static void deposit(Integer num){
 		acct = AcctRecords.acctMap.get(num);
 		double balance = acct.getBalance();
 		acct.setBalance(balance + money);
@@ -64,13 +84,7 @@ public class Transactions {
 	
 	public static void depositBlurb(Integer num, int count) {
 		System.out.println("How much would you like to deposit?");
-		try {
-			money = Double.parseDouble(sc.nextLine());
-		}
-		catch (NegNumException e){
-			e.printStackTrace();
-		}
-		
+		money = Double.parseDouble(sc.nextLine());
 		deposit(num);
 		transactions(cust, counter);
 	}
@@ -79,8 +93,21 @@ public class Transactions {
 		System.out.println("How much would you like to withdraw?");
 		money = Double.parseDouble(sc.nextLine());
 		withdraw(num);
-		
 		transactions(cust, counter);
+	}
+	
+	public static void transferBlurb(Integer num, int count) {
+		System.out.println("Which account are you making this transaction from?");
+		Integer numAcct = Integer.parseInt(sc.nextLine());
+		if(i == true) {
+		withdraw(numAcct);
+		}
+		else if (i == false) {
+		deposit(numAcct);
+		}
+		else {
+		transfer(numAcct, counter);
+		}
 	}
 	
 	public static void transfer(Integer num, int count) {

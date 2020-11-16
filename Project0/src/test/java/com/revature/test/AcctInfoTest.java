@@ -9,7 +9,7 @@ import com.revature.service.AcctInfo;
 public class AcctInfoTest {
 
 	@Test
-	public void accountInfoTest() {
+	public static void accountInfoTest() {
 		AcctInfo ai = new AcctInfo(); 
 		int count = 0;
 		ai.accountInfo(count);

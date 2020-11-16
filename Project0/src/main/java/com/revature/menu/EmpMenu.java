@@ -52,7 +52,6 @@ public class EmpMenu {
 		System.out.println("Enter Employee UserName to Login");
 		String empLogin = sc.nextLine();
 		loginTemp = EmpRecords.empMap.get(empLogin);
-		System.out.println(loginTemp);
 		if(EmpRecords.empMap.containsKey(empLogin)) {
 			System.out.println("Enter Employee Password to Login");
 		}
