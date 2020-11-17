@@ -44,9 +44,18 @@ public class AccountsDAOimpl implements AccountsDAO{
 		ps.executeUpdate();
 	}
 	
-	public Accounts getAcct(int acctNum) throws SQLException {
-		
-		return null;
+	@Override
+	public Accounts getUserAccts(int userid) throws SQLException {
+		Connection conn = cf.getConnection();
+		String sql = "select * from bank.accounts where acctid=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, userid);
+		ResultSet rs = ps.executeQuery();
+		Accounts a = null;
+		while(rs.next()) {
+			a = new Accounts(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
+		}
+		return a;
 	}
 	
 	public void updateAcct() throws SQLException {

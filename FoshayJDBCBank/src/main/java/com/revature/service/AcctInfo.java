@@ -1,16 +1,43 @@
 package com.revature.service;
 
+import java.sql.SQLException;
+import java.util.Random;
 import java.util.Scanner;
 
+import com.revature.beans.Accounts;
+import com.revature.dao.AccountsDAO;
+import com.revature.daoimpl.AccountsDAOimpl;
 import com.revature.menu.AccountMenu;
 import com.revature.menu.UserMenu;
 
 public class AcctInfo extends AccountMenu{
 	
+	public static int acctNum;
+	public static String acctType;
 	static Scanner sc = new Scanner(System.in);
+	
+	public static int getRandomNumberInRange(int min, int max) {
+		if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+	}
+	
+	public static void newAcct(AccountsDAO x) {
+		try {
+			x.insert(new Accounts(id, acctNum, 0, acctType));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static void addAccount(int userId) {
 		id = userId;
+		acctNum = getRandomNumberInRange(0, 30000);
+		AccountsDAO ad = new AccountsDAOimpl();
 		System.out.println("What kind of account would you like to add?");
 		System.out.println("\t[C]hecking");
 		System.out.println("\t[S]avings");
@@ -20,17 +47,20 @@ public class AcctInfo extends AccountMenu{
 		String choice = sc.nextLine();
 		switch(choice.toLowerCase()) {
 		case "c":
-			//add a checking account to the database
+			acctType = "Checking";
+			newAcct(ad);
 			System.out.println("You have successfully added a checking account.");
 			addAccount(id);
 			break;
 		case "s":
-			//add a savings account to the database
+			acctType = "Savings";
+			newAcct(ad);
 			System.out.println("You have successfully added a saving account.");
 			addAccount(id);
 			break;
 		case "m":
-			//add a money market account to the database
+			acctType = "Money Market";
+			newAcct(ad);
 			System.out.println("You have successfully added a money market account");
 			addAccount(id);
 			break;

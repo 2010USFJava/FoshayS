@@ -11,4 +11,6 @@ public interface AccountsDAO {
 
 	void insert(Accounts a) throws SQLException;
 
+	Accounts getUserAccts(int userid) throws SQLException;
+
 }
