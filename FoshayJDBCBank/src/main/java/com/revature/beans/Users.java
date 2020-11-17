@@ -2,9 +2,16 @@ package com.revature.beans;
 
 public class Users {
 	
+	private int userid;
 	private String userName;
 	private String password;
 	
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -24,6 +31,13 @@ public class Users {
 		this.password = password;
 	}
 	
+	
+	public Users(int userid, String userName, String password) {
+		super();
+		this.userid = userid;
+		this.userName = userName;
+		this.password = password;
+	}
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -31,8 +45,10 @@ public class Users {
 	
 	@Override
 	public String toString() {
-		return "Users [userName=" + userName + ", password=" + password + "]";
+		return "Users [userid=" + userid + ", userName=" + userName + ", password=" + password + "]";
 	}
+	
+	
 	
 	
 

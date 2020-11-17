@@ -15,17 +15,20 @@ import com.revature.util.ConnFactory;
 public class UsersDAOimpl implements UsersDAO{
 	public static ConnFactory cf = ConnFactory.getInstance();
 	
+	public static List<Users> UserList = new ArrayList<Users>();
+	
+	
 	@Override
 	public List<Users> getAllUsers() throws SQLException {
-		List<Users> UserList = new ArrayList<Users>();
+		
 		Connection conn = cf.getConnection();
 		Statement stmt = conn.createStatement();
-		//ResultSet rs = stmt.executeQuery(arg0);
-		//Users u = null;
-		//while (rs.next()) {
-			//u = new Users(rs.getString(1), rs.getString(2), rs.getInt(3));
-			//UserList.add(u);
-		//}
+		ResultSet rs = stmt.executeQuery("select * from bank.users");
+		Users u = null;
+		while (rs.next()) {
+			u = new Users(rs.getInt(1), rs.getString(2), rs.getString(3));
+			UserList.add(u);
+		}
 		
 		return UserList;
 	}
@@ -38,6 +41,22 @@ public class UsersDAOimpl implements UsersDAO{
 		ps.setString(1, u.getUserName());
 		ps.setString(2, u.getPassword());
 		ps.executeUpdate();
+	}
+	
+	@Override
+	public Users getUserName(String name) throws SQLException {
+		
+		return null;
+	}
+	
+	@Override
+	public void updateUser() throws SQLException {
+		
+	}
+	
+	@Override
+	public void deleteUser() throws SQLException {
+		
 	}
 
 }

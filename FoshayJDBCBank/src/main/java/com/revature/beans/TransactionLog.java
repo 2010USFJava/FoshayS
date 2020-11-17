@@ -2,30 +2,36 @@ package com.revature.beans;
 
 public class TransactionLog {
 
-	private String log;
-
-	public String getLog() {
-		return log;
+	private int logId;
+	private int acctNum;
+	
+	public int getLogId() {
+		return logId;
 	}
-
-	public void setLog(String log) {
-		this.log = log;
+	public void setLogId(int logId) {
+		this.logId = logId;
 	}
-
-	public TransactionLog(String log) {
+	public int getAcctNum() {
+		return acctNum;
+	}
+	public void setAcctNum(int acctNum) {
+		this.acctNum = acctNum;
+	}
+	public TransactionLog(int logId, int acctNum) {
 		super();
-		this.log = log;
+		this.logId = logId;
+		this.acctNum = acctNum;
 	}
-
 	public TransactionLog() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	@Override
 	public String toString() {
-		return "TransactionLog [log=" + log + "]";
+		return "TransactionLog [logId=" + logId + ", acctNum=" + acctNum + "]";
 	}
+	
+	
 	
 	
 }
