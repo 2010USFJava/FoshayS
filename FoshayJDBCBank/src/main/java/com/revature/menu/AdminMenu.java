@@ -1,12 +1,17 @@
 package com.revature.menu;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import com.revature.beans.Users;
+import com.revature.daoimpl.UsersDAOimpl;
 import com.revature.service.UserInfo;
 
 public class AdminMenu extends RegistrationMenu{
 	
-	public static String id;
+	public static int id;
 	static Scanner sc = new Scanner(System.in);
 	
 	public static void startAdmin() {
@@ -63,7 +68,16 @@ public class AdminMenu extends RegistrationMenu{
 			startAdmin();
 			break;
 		case "a":
-			//return all user from the database
+			UsersDAOimpl udi = new UsersDAOimpl();
+			
+			try {
+				List<Users> userList = (ArrayList<Users>)udi.getAllUsers();
+				for (Users u : userList)
+					System.out.println(u.getUserName());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			whichUser();
 			break;
 		case "e":

@@ -12,7 +12,6 @@ public class UserInfo extends AdminMenu{
 	public static void viewUser() {
 		System.out.println("Please choose the user you would like to view");
 		//display all users in a sysout menu with choice options
-		id = "one";
 	}
 	
 	public static void updateUser() {

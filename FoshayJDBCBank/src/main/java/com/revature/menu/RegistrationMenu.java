@@ -9,7 +9,7 @@ import com.revature.daoimpl.UsersDAOimpl;
 
 public class RegistrationMenu {
 	
-	public static String acctNum;
+	public static int acctNum;
 	static Scanner sc = new Scanner(System.in);
 	
 	public static void startReg() {
