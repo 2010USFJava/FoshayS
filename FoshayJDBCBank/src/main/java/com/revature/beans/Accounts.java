@@ -2,13 +2,13 @@ package com.revature.beans;
 
 public class Accounts {
 	
-	private Integer acctNum;
+	private int acctNum;
 	private double balance;
 	
-	public Integer getAcctNum() {
+	public int getAcctNum() {
 		return acctNum;
 	}
-	public void setAcctNum(Integer acctNum) {
+	public void setAcctNum(int acctNum) {
 		this.acctNum = acctNum;
 	}
 	public double getBalance() {
@@ -18,7 +18,7 @@ public class Accounts {
 		this.balance = balance;
 	}
 	
-	public Accounts(Integer acctNum, double balance) {
+	public Accounts(int acctNum, double balance) {
 		super();
 		this.acctNum = acctNum;
 		this.balance = balance;
