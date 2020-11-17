@@ -9,12 +9,12 @@ public class Transactions extends AccountMenu{
 	
 	static Scanner sc = new Scanner(System.in);
 	
-	public static void transactionStart(String userId) {
+	public static void transactionStart(int userId) {
 		id = userId;
 		accountMenu(id);
 	}
 
-	public static void makeTransaction(String acctNum) {
+	public static void makeTransaction(int acctNum) {
 		acct = acctNum;
 		System.out.println("What type of transaction would you like to make?");
 		System.out.println("\t[D]eposit");
@@ -39,7 +39,7 @@ public class Transactions extends AccountMenu{
 		}
 	}
 	
-	public static void deposit(String acctNum) {
+	public static void deposit(int acctNum) {
 		System.out.println("You can now make a deposit");
 		//String dep = sc.nextLine();
 		//add money to acctNum in database
@@ -47,7 +47,7 @@ public class Transactions extends AccountMenu{
 		makeTransaction(acct);
 	}
 	
-	public static void withdrawal(String acctNum) {
+	public static void withdrawal(int acctNum) {
 		System.out.println("You can now make a withdrawal");
 		//String with = sc.nextLine();
 		//subtract money from acctNum in database
@@ -55,7 +55,7 @@ public class Transactions extends AccountMenu{
 		makeTransaction(acct);
 	}
 	
-	public static void transactionLog(String userId) {
+	public static void transactionLog(int userId) {
 		id = userId;
 		System.out.println("You can see all of your transactions");
 		// order them by account #

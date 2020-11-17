@@ -8,11 +8,11 @@ import com.revature.service.Transactions;
 public class UserMenu {
 	
 	
-	public static String id;
+	public static int id;
 	
 	static Scanner sc = new Scanner(System.in);
 	
-	public static void startUser(String userId){
+	public static void startUser(int userId){
 		id = userId;
 		System.out.println("Welcome to the User Menu");
 		System.out.println("What would you like to do?");
@@ -41,7 +41,6 @@ public class UserMenu {
 			AcctInfo.deleteAccount(id);
 			break;
 		case "l":
-			id = null;
 			MainMenu.startMenu();
 			break;
 		}

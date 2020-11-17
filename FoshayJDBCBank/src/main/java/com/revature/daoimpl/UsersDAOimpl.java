@@ -45,8 +45,16 @@ public class UsersDAOimpl implements UsersDAO{
 	
 	@Override
 	public Users getUserName(String name) throws SQLException {
-		
-		return null;
+		Connection conn = cf.getConnection();
+		String sql = "select * from bank.users where username=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, name);
+		ResultSet rs = ps.executeQuery();
+		Users u = null;
+		while (rs.next()) {
+			u = new Users(rs.getInt(1), rs.getString(2), rs.getString(3));
+		}
+		return u;
 	}
 	
 	@Override

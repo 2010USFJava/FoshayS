@@ -9,7 +9,7 @@ public class AcctInfo extends AccountMenu{
 	
 	static Scanner sc = new Scanner(System.in);
 
-	public static void addAccount(String userId) {
+	public static void addAccount(int userId) {
 		id = userId;
 		System.out.println("What kind of account would you like to add?");
 		System.out.println("\t[C]hecking");
@@ -46,7 +46,7 @@ public class AcctInfo extends AccountMenu{
 	
 	}
 	
-	public static void viewAccounts(String userId) {
+	public static void viewAccounts(int userId) {
 		id = userId;
 		
 		System.out.println("These are all of your accounts.");
@@ -68,7 +68,7 @@ public class AcctInfo extends AccountMenu{
 		}
 	}
 	
-	public static void deleteAccount(String userId) {
+	public static void deleteAccount(int userId) {
 		id = userId;
 		accountMenu(id);
 		//custom exception if balance is not zero then sysout that account cannot be removed.

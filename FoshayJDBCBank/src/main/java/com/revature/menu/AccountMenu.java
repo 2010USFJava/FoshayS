@@ -4,10 +4,10 @@ import com.revature.service.Transactions;
 
 public class AccountMenu {
 	
-	public static String id;
-	public static String acct;
+	public static int id;
+	public static int acct;
 
-	public static void accountMenu(String userId) {
+	public static void accountMenu(int userId) {
 		id = userId;
 		System.out.println("Choose an account.");
 		//display all user accounts in a sysout menu with choice options
