@@ -2,8 +2,8 @@ package com.revature.beans;
 
 public class Accounts {
 	
-	private int userid;
 	private int acctNum;
+	private int userid;
 	private double balance;
 	private String acctType;
 	

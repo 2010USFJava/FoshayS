@@ -14,6 +14,7 @@ public class UserMenu {
 	
 	public static void startUser(int userId){
 		id = userId;
+		//fix id assignment after just registering a user
 		System.out.println("Welcome to the User Menu");
 		System.out.println("What would you like to do?");
 		System.out.println("\t[A]dd an account");

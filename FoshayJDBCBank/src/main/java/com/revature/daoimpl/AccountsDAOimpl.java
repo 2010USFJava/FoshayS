@@ -37,8 +37,8 @@ public class AccountsDAOimpl implements AccountsDAO{
 		Connection conn = cf.getConnection();
 		String sql = "insert into bank.accounts values (?, ?, ?, ?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setInt(1, a.getUserid());
-		ps.setInt(2, a.getAcctNum());
+		ps.setInt(1, a.getAcctNum());
+		ps.setInt(2, a.getUserid());
 		ps.setDouble(3, a.getBalance());
 		ps.setString(4, a.getAcctType());
 		ps.executeUpdate();

@@ -36,7 +36,6 @@ public class AcctInfo extends AccountMenu{
 
 	public static void addAccount(int userId) {
 		id = userId;
-		acctNum = getRandomNumberInRange(0, 30000);
 		AccountsDAO ad = new AccountsDAOimpl();
 		System.out.println("What kind of account would you like to add?");
 		System.out.println("\t[C]hecking");
@@ -47,18 +46,21 @@ public class AcctInfo extends AccountMenu{
 		String choice = sc.nextLine();
 		switch(choice.toLowerCase()) {
 		case "c":
+			acctNum = getRandomNumberInRange(0, 30000);
 			acctType = "Checking";
 			newAcct(ad);
 			System.out.println("You have successfully added a checking account.");
 			addAccount(id);
 			break;
 		case "s":
+			acctNum = getRandomNumberInRange(0, 30000);
 			acctType = "Savings";
 			newAcct(ad);
 			System.out.println("You have successfully added a saving account.");
 			addAccount(id);
 			break;
 		case "m":
+			acctNum = getRandomNumberInRange(0, 30000);
 			acctType = "Money Market";
 			newAcct(ad);
 			System.out.println("You have successfully added a money market account");

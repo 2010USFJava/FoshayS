@@ -2,25 +2,24 @@ package com.revature.beans;
 
 public class TransactionLog {
 
-	private int logId;
-	private int acctNum;
-	
-	public int getLogId() {
-		return logId;
+	private int userid;
+	private int actionid;
+	public int getUserid() {
+		return userid;
 	}
-	public void setLogId(int logId) {
-		this.logId = logId;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
-	public int getAcctNum() {
-		return acctNum;
+	public int getActionid() {
+		return actionid;
 	}
-	public void setAcctNum(int acctNum) {
-		this.acctNum = acctNum;
+	public void setActionid(int actionid) {
+		this.actionid = actionid;
 	}
-	public TransactionLog(int logId, int acctNum) {
+	public TransactionLog(int userid, int actionid) {
 		super();
-		this.logId = logId;
-		this.acctNum = acctNum;
+		this.userid = userid;
+		this.actionid = actionid;
 	}
 	public TransactionLog() {
 		super();
@@ -28,8 +27,10 @@ public class TransactionLog {
 	}
 	@Override
 	public String toString() {
-		return "TransactionLog [logId=" + logId + ", acctNum=" + acctNum + "]";
+		return "TransactionLog [userid=" + userid + ", actionid=" + actionid + "]";
 	}
+	
+
 	
 	
 	
