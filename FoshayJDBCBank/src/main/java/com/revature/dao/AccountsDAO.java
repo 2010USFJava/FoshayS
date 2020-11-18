@@ -11,6 +11,12 @@ public interface AccountsDAO {
 
 	void insert(Accounts a) throws SQLException;
 
-	Accounts getUserAccts(int userid) throws SQLException;
+	List<Accounts> getUserAccts(int userid) throws SQLException;
+
+	void deleteAcct(int acct) throws SQLException;
+
+	void updateAcct(double balance, int acctnum) throws SQLException;
+
+	Accounts getOneAcct(int acctNum) throws SQLException;
 
 }

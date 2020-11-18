@@ -16,6 +16,7 @@ public class AccountsDAOimpl implements AccountsDAO{
 	
 	public static ConnFactory cf = ConnFactory.getInstance();
 	public static List<Accounts> AcctList = new ArrayList<Accounts>();
+	public static List<Accounts> userAcctList = new ArrayList<Accounts>();
 	
 	@Override
 	public List<Accounts> getAll() throws SQLException {
@@ -45,25 +46,51 @@ public class AccountsDAOimpl implements AccountsDAO{
 	}
 	
 	@Override
-	public Accounts getUserAccts(int userid) throws SQLException {
+	public List<Accounts> getUserAccts(int userid) throws SQLException {
 		Connection conn = cf.getConnection();
-		String sql = "select * from bank.accounts where acctid=?";
+		String sql = "select * from bank.accounts where userid=?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, userid);
 		ResultSet rs = ps.executeQuery();
 		Accounts a = null;
 		while(rs.next()) {
 			a = new Accounts(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
+			userAcctList.add(a);
+		}
+		return userAcctList;
+	}
+	
+	@Override
+	public Accounts getOneAcct(int acctNum) throws SQLException {
+		Connection conn = cf.getConnection();
+		String sql = "select * from bank.accounts where acctnum=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, acctNum);
+		ResultSet rs = ps.executeQuery();	
+		Accounts a = null;
+		while (rs.next()) {
+		a = new Accounts(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
 		}
 		return a;
-	}
+		}
 	
-	public void updateAcct() throws SQLException {
-		
-	}
+	@Override
+	public void updateAcct(double balance, int acctnum) throws SQLException {
+		Connection conn = cf.getConnection();
+		String sql = "update bank.accounts set balance=? where acctnum=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setDouble(1, balance);
+		ps.setInt(2, acctnum);
+		ps.executeUpdate();
+		}
 	
-	public void deleteAcct() throws SQLException {
-		
+	@Override
+	public void deleteAcct(int acctNum) throws SQLException {
+		Connection conn = cf.getConnection();
+		String sql = "delete from bank.accounts where acctnum=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, acctNum);
+		ps.executeUpdate();
 	}
 
 }

@@ -12,7 +12,7 @@ import com.revature.beans.Users;
 import com.revature.dao.UsersDAO;
 import com.revature.util.ConnFactory;
 
-public class UsersDAOimpl implements UsersDAO{
+	public class UsersDAOimpl implements UsersDAO{
 	public static ConnFactory cf = ConnFactory.getInstance();
 	
 	public static List<Users> UserList = new ArrayList<Users>();
@@ -58,13 +58,32 @@ public class UsersDAOimpl implements UsersDAO{
 	}
 	
 	@Override
-	public void updateUser() throws SQLException {
-		
+	public void updateUserName(String newName, String userName) throws SQLException {
+		Connection conn = cf.getConnection();
+		String sql = "update bank.users set username=? where username=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, newName);
+		ps.setString(2, userName);
+		ps.executeUpdate();
 	}
 	
 	@Override
-	public void deleteUser() throws SQLException {
-		
+	public void updatePassword(String password, String userName) throws SQLException {
+		Connection conn = cf.getConnection();
+		String sql = "update bank.users set pass=? where username=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, password);
+		ps.setString(2, userName);
+		ps.executeUpdate();
+	}
+	
+	@Override
+	public void deleteUser(String userName) throws SQLException {
+		Connection conn = cf.getConnection();
+		String sql = "delete from bank.users where username=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, userName);
+		ps.executeUpdate();
 	}
 
 }

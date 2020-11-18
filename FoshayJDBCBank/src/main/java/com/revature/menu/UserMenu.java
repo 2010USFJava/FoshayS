@@ -5,7 +5,7 @@ import java.util.Scanner;
 import com.revature.service.AcctInfo;
 import com.revature.service.Transactions;
 
-public class UserMenu {
+public class UserMenu extends AccountMenu{
 	
 	
 	public static int id;
@@ -34,11 +34,13 @@ public class UserMenu {
 			break;
 		case "m":
 			Transactions.transactionStart(id);
+			Transactions.makeTransaction();
 			break;
 		case "s":
 			Transactions.transactionLog(id);
 			break;
 		case "r":
+			AccountMenu.acctArrayList(id);
 			AcctInfo.deleteAccount(id);
 			break;
 		case "l":

@@ -31,10 +31,11 @@ public class Accounts {
 	public void setAcctType(String acctType) {
 		this.acctType = acctType;
 	}
-	public Accounts(int userid, int acctNum, double balance, String acctType) {
+
+	public Accounts(int acctNum, int userid, double balance, String acctType) {
 		super();
-		this.userid = userid;
 		this.acctNum = acctNum;
+		this.userid = userid;
 		this.balance = balance;
 		this.acctType = acctType;
 	}

@@ -1,6 +1,8 @@
 package com.revature.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,7 +14,6 @@ import com.revature.menu.UserMenu;
 
 public class AcctInfo extends AccountMenu{
 	
-	public static int acctNum;
 	public static String acctType;
 	static Scanner sc = new Scanner(System.in);
 	
@@ -27,7 +28,7 @@ public class AcctInfo extends AccountMenu{
 	
 	public static void newAcct(AccountsDAO x) {
 		try {
-			x.insert(new Accounts(id, acctNum, 0, acctType));
+			x.insert(new Accounts(acct, id, 0, acctType));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,21 +47,21 @@ public class AcctInfo extends AccountMenu{
 		String choice = sc.nextLine();
 		switch(choice.toLowerCase()) {
 		case "c":
-			acctNum = getRandomNumberInRange(0, 30000);
+			acct = getRandomNumberInRange(0, 30000);
 			acctType = "Checking";
 			newAcct(ad);
 			System.out.println("You have successfully added a checking account.");
 			addAccount(id);
 			break;
 		case "s":
-			acctNum = getRandomNumberInRange(0, 30000);
+			acct = getRandomNumberInRange(0, 30000);
 			acctType = "Savings";
 			newAcct(ad);
 			System.out.println("You have successfully added a saving account.");
 			addAccount(id);
 			break;
 		case "m":
-			acctNum = getRandomNumberInRange(0, 30000);
+			acct = getRandomNumberInRange(0, 30000);
 			acctType = "Money Market";
 			newAcct(ad);
 			System.out.println("You have successfully added a money market account");
@@ -80,15 +81,17 @@ public class AcctInfo extends AccountMenu{
 	
 	public static void viewAccounts(int userId) {
 		id = userId;
-		
 		System.out.println("These are all of your accounts.");
-		//pull all accounts from the database
+		acctArrayList(id);
+		for (Accounts a : acctList)
+			System.out.println(a.getAcctNum());
 		System.out.println("Would you like to make a transaction on any of these accounts? (y/n)");
 		
 		String option = sc.nextLine();
 		switch(option.toLowerCase()) {
 		case "y":
-			Transactions.makeTransaction(id);
+			accountMenu(id);
+			Transactions.makeTransaction();
 			break;
 		case "n":
 			UserMenu.startUser(id);
@@ -100,12 +103,19 @@ public class AcctInfo extends AccountMenu{
 		}
 	}
 	
-	public static void deleteAccount(int userId) {
-		id = userId;
+	public static void deleteAccount(int userid) {
 		accountMenu(id);
 		//custom exception if balance is not zero then sysout that account cannot be removed.
-		//delete acct
+		AccountsDAO ad = new AccountsDAOimpl();
+		try {
+			ad.deleteAcct(acct);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(acct + " has been deleted.");
 		UserMenu.startUser(id);
 	}
+
+	
 }

@@ -7,12 +7,16 @@ import java.util.Scanner;
 
 import com.revature.beans.Users;
 import com.revature.daoimpl.UsersDAOimpl;
+import com.revature.service.Transactions;
 import com.revature.service.UserInfo;
 
 public class AdminMenu extends RegistrationMenu{
 	
 	public static int id;
 	static Scanner sc = new Scanner(System.in);
+	public static List<Users> userList;
+	public static String username;
+	public static int acct;
 	
 	public static void startAdmin() {
 		System.out.println("Welcome to the Admin Menu.");
@@ -37,9 +41,8 @@ public class AdminMenu extends RegistrationMenu{
 			UserInfo.updateUser();
 			break;
 		case "m":
-			UserInfo.viewUser();
-			System.out.println(id);
-			AccountMenu.accountMenu(id);
+			UserInfo.viewUsers();
+			
 			break;
 		case "d":
 			UserInfo.deleteUser();
@@ -64,14 +67,17 @@ public class AdminMenu extends RegistrationMenu{
 		String choice = sc.nextLine();
 		switch(choice.toLowerCase()) {
 		case "o":
-			UserInfo.viewUser();
+			UserInfo.viewUsers();
+			UserInfo.viewOneUser();
 			startAdmin();
 			break;
 		case "a":
 			UsersDAOimpl udi = new UsersDAOimpl();
 			
 			try {
-				List<Users> userList = (ArrayList<Users>)udi.getAllUsers();
+				if(userList == null) {
+				userList = (ArrayList<Users>)udi.getAllUsers();
+				}
 				for (Users u : userList)
 					System.out.println(u.getUserName());
 			} catch (SQLException e) {
